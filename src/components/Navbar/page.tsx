@@ -43,7 +43,29 @@ export default function Navbar() {
           > My Plan
           </Link>
         </div>
+        
+        {/* Right Side */}
+        <div className="flex items-center gap-5">
 
+          {/* Plan */}
+          <Link href="/my-plan" className="flex items-center gap-2 text-xs font-semibold text-white">
+            <span>Plan</span>
+
+            <span className="flex h-5 min-w-5 items-center justify-center rounded-full bg-[#C2F800] px-1.5 text-[10px] font-bold text-black">
+              {planCount}
+            </span>
+          </Link>
+
+          {/* Saved */}
+          <Link href="/my-plan" className="flex items-center gap-2 text-xs font-semibold text-white">
+            <span>Saved</span>
+
+            <span className="flex h-5 min-w-5 items-center justify-center rounded-full border border-white/40 px-1.5 text-[10px] font-bold text-white">
+              {savedCount}
+            </span>
+          </Link>
+
+        </div>
       </nav>
     </header>
   );
