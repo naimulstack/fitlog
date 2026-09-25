@@ -1,14 +1,13 @@
+import BannerPage from "@/components/Banner/page";
+import FooterPage from "@/components/Footer/page";
+import LibraryData from "@/components/Library/page";
 
-import { IDataType } from "@/types/data-type"
 
-const AllData = async () => {
-  const response = await fetch("https://api.abcz.workers.dev/api/fitlog");
-  const data: IDataType = await response.json();
+const AllData = () => {
 
-  console.log(data)
   return (
       <div>
-
+        <LibraryData />
       </div>
   );
 };

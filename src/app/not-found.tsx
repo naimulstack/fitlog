@@ -21,8 +21,7 @@ export default function NotFound() {
 
         {/* Home Button */}
         <div className="mt-8">
-          <a
-            href="/"
+          <a href="/"
             className="inline-flex items-center rounded-xl bg-white px-7 py-3 font-semibold text-slate-950 transition duration-300 hover:bg-slate-200"
           >
             ← Back to Home
