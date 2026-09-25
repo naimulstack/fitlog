@@ -5,6 +5,15 @@ import { FitLogProvider } from "@/context/FitLogContext";
 import Navbar from "@/components/Navbar/page";
 import Banner from "@/components/Banner/page"
 
+import { Oswald } from "next/font/google";
+
+// ১. Oswald ফন্টের জন্য ভ্যারিয়েবল এবং ওজন (weights) ডিক্লেয়ার করা হলো
+const oswald = Oswald({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-oswald",
+});
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -24,7 +33,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      // ২. className-এ oswald.variable যোগ করা হলো
+      className={`${geistSans.variable} ${geistMono.variable} ${oswald.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
 
