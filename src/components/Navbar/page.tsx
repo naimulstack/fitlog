@@ -13,7 +13,7 @@ export default function Navbar() {
   return (
     <header className="border-b border-gray-700 bg-[#0C0D10]">
 
-      <nav className="mx-auto flex h-16 max-w-7xl items-center justify-between px-5 container">
+      <nav className="mx-auto flex h-16 items-center justify-between container">
 
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2">
@@ -43,7 +43,7 @@ export default function Navbar() {
           > My Plan
           </Link>
         </div>
-        
+
         {/* Right Side */}
         <div className="flex items-center gap-5">
 
