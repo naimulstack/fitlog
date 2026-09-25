@@ -4,7 +4,7 @@ import BannerImage from "@/assets/banner.png";
 
 const BannerPage = () => {
     return (
-        <section className="mx-auto mt-8 container p-4">
+        <section className="mx-auto mt-8 container">
             <div className="grid grid-cols-1 items-center overflow-hidden rounded-xl border border-white/10 bg-[#222630] p-8 md:grid-cols-2 md:px-10 md:py-7">
 
                 {/* Left Content */}
@@ -14,18 +14,17 @@ const BannerPage = () => {
                         WORKOUT LIBRARY
                     </p>
 
-                    <h1 className="font-oswald max-w-[570px] text-4xl font-black leading-[0.95] tracking-tight text-white sm:text-5xl md:text-[42px] lg:text-[44px]">
-                        TRAIN WITH INTENT. LOG EVERY SET.
+                    <h1 className="font-oswald text-4xl font-black text-white sm:text-5xl md:text-[42px] lg:text-[55px]">
+                        TRAIN WITH INTENT. LOG <br />EVERY SET.
                     </h1>
 
-                    <p className="mt-4 max-w-[500px] text-sm leading-6 text-gray-400">
+                    <p className="mt-4 max-w-[500px] leading-6 text-gray-400">
                         FitLog is a dark, no-nonsense gym companion: pick a lift, lock it
                         into today's plan, and watch the week's work add up.
                     </p>
 
-                    <Link
-                        href="#library"
-                        className="mt-5 inline-flex items-center rounded-md bg-[#C2F800] px-5 py-2.5 text-[10px] font-bold text-black transition hover:bg-[#d4ff3d]"
+                    <Link href=""
+                        className="mt-5 inline-flex items-center rounded-md bg-[#C2F800] px-6 py-2.5 text-[11px] font-bold text-black transition hover:bg-[#1A2312] hover:text-[#C2F800]"
                     >
                         BROWSE WORKOUTS
                     </Link>

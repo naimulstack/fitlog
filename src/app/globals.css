@@ -4,3 +4,13 @@
 @theme { 
     --font-oswald: var(--font-oswald);
 }
+
+:root {
+  --background: #15171D;
+  --foreground: #ffffff;
+}
+
+body {
+  background: #050505;
+  color: #ffffff;
+}

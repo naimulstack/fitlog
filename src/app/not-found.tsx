@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function NotFound() {
   return (
     <main className="min-h-screen bg-slate-950 flex items-center justify-center px-6">
@@ -21,11 +23,11 @@ export default function NotFound() {
 
         {/* Home Button */}
         <div className="mt-8">
-          <a href="/"
+          <Link href="/"
             className="inline-flex items-center rounded-xl bg-white px-7 py-3 font-semibold text-slate-950 transition duration-300 hover:bg-slate-200"
           >
             ← Back to Home
-          </a>
+          </Link>
         </div>
 
         {/* Decoration */}

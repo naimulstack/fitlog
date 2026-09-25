@@ -1,12 +1,12 @@
-import BannerPage from "@/components/Banner/page";
-import FooterPage from "@/components/Footer/page";
 import LibraryData from "@/components/Library/page";
+import Banner from "@/components/Banner/page"
 
 
 const AllData = () => {
 
   return (
       <div>
+        <Banner />
         <LibraryData />
       </div>
   );

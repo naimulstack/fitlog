@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { IDataType } from "@/types/data-type";
 import { FaRegClock, FaFire, FaStar } from "react-icons/fa";
 
@@ -11,9 +12,10 @@ const LibraryData = async () => {
 
     return (
         <div className="container mx-auto mt-10">
+
             {/* Library Heading */}
-            <div className="mb-8 ">
-                <h2 className="text-3xl font-bold text-white">
+            <div className="mb-8">
+                <h2 className="font-oswald text-3xl font-bold text-white">
                     THE LIBRARY
                 </h2>
 
@@ -23,65 +25,81 @@ const LibraryData = async () => {
             </div>
 
             {/* Cards */}
-            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+
                 {data.map((card) => {
                     return (
-                        <div key={card.id} className="overflow-hidden rounded-2xl border border-white/10 bg-[#20242E]"
+                        <Link
+                            key={card.id}
+                            href={`/exercise-details/${card.id}`}
+                            className="block"
                         >
-                            {/* Image */}
-                            <div className="relative h-[300px] w-full">
-                                <Image src={card.image} alt={card.name} fill className="object-cover"
-                                />
-                            </div>
+                            <div className="overflow-hidden rounded-2xl border border-white/10 bg-[#20242E] transition-transform duration-300 hover:scale-101 hover:border-amber-300">
 
-                            {/* Card Content */}
-                            <div className="p-6">
-
-                                {/* Muscle Groups */}
-                                <div className="mb-5 flex flex-wrap gap-2">
-                                    {card.muscleGroups.map((muscle) => (
-                                        <span key={muscle}
-                                            className="rounded-full bg-[#C2F800] px-3 py-1 text-[11px] font-semibold uppercase text-black font-oswald"
-                                        >
-                                            {muscle}
-                                        </span>
-                                    ))}
+                                {/* Image */}
+                                <div className="relative h-[300px] w-full">
+                                    <Image
+                                        src={card.image}
+                                        alt={card.name}
+                                        fill
+                                        className="object-cover"
+                                    />
                                 </div>
 
-                                {/* Name */}
-                                <h3 className="text-lg font-bold uppercase tracking-wide text-white font-oswald">
-                                    {card.name}
-                                </h3>
+                                {/* Card Content */}
+                                <div className="p-8">
 
-                                {/* Equipment */}
-                                <p className="mt-2 text-sm text-gray-400">
-                                    {card.equipment}
-                                </p>
+                                    {/* Muscle Groups */}
+                                    <div className="mb-5 flex flex-wrap gap-2">
+                                        {card.muscleGroups.map((muscle) => (
+                                            <span
+                                                key={muscle}
+                                                className="rounded-full bg-[#C2F800] px-3 py-1 font-oswald text-[11px] font-semibold uppercase text-black"
+                                            >
+                                                {muscle}
+                                            </span>
+                                        ))}
+                                    </div>
 
-                                {/* Line */}
-                                <div className="my-5 border-t border-white/10" />
+                                    {/* Name */}
+                                    <h3 className="font-oswald text-lg font-bold uppercase tracking-wide text-white">
+                                        {card.name}
+                                    </h3>
 
-                                {/* Duration, Calories, Rating */}
-                                <div className="flex items-center gap-5 text-sm text-gray-400">
-                                    <p className="flex items-center gap-2">
-                                        <FaRegClock size={14} />
-                                        {card.duration} min
+                                    {/* Equipment */}
+                                    <p className="mt-2 text-sm text-gray-400">
+                                        {card.equipment}
                                     </p>
 
-                                    <p className="flex items-center gap-2">
-                                        <FaFire size={14} />
-                                        {card.caloriesBurned} kcal
-                                    </p>
+                                    {/* Line */}
+                                    <div className="my-5 border-t border-white/10" />
 
-                                    <p className="flex items-center gap-2">
-                                        <FaStar size={14} />
-                                        {card.rating}
-                                    </p>
+                                    {/* Duration, Calories, Rating */}
+                                    <div className="flex items-center gap-5 text-sm text-gray-400">
+
+                                        <p className="flex items-center gap-2">
+                                            <FaRegClock size={14} />
+                                            {card.duration} min
+                                        </p>
+
+                                        <p className="flex items-center gap-2">
+                                            <FaFire size={14} />
+                                            {card.caloriesBurned} kcal
+                                        </p>
+
+                                        <p className="flex items-center gap-2">
+                                            <FaStar size={14} />
+                                            {card.rating}
+                                        </p>
+
+                                    </div>
+
                                 </div>
                             </div>
-                        </div>
+                        </Link>
                     );
                 })}
+
             </div>
         </div>
     );
