@@ -4,7 +4,7 @@ import { IDataType } from "@/types/data-type";
 import { FaRegClock, FaFire, FaStar } from "react-icons/fa";
 
 const LibraryData = async () => {
-    const response = await fetch("https://api.abcz.workers.dev/api/fitlog");
+    const response = await fetch("https://api.api-store.workers.dev/api/fitlog");
 
     const data: IDataType[] = await response.json();
 
@@ -28,7 +28,7 @@ const LibraryData = async () => {
                         <Link key={card.id} href={`/exercise-details/${card.id}`}
                             className="block"
                         >
-                            <div className="overflow-hidden rounded-2xl border border-white/10 bg-[#20242E] transition-transform duration-300 hover:scale-101 hover:border-amber-300">
+                            <div className="overflow-hidden rounded-2xl border border-white/10 bg-[#20242E] transition-transform duration-300 hover:scale-[1.01] hover:border-amber-300">
 
                                 {/* Image */}
                                 <div className="relative h-[300px] w-full">
