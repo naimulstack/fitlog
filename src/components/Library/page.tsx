@@ -9,7 +9,7 @@ const LibraryData = async () => {
     const data: IDataType[] = await response.json();
 
     return (
-        <div id="workout-library" className="container mx-auto mt-10">
+        <div id="workout-library" className="container mx-auto m-10">
 
             <div className="mb-8">
                 <h2 className="font-oswald text-3xl font-bold text-white">

@@ -36,7 +36,7 @@ function MyPlanContent({ children }: { children: ReactNode }) {
   const searchParams = useSearchParams();
 
   const isSaved = pathname === "/My-Plan/saved";
-  const sortBy = searchParams.get("sort") || "rating";
+  const sortBy = searchParams.get("sort") || "duration";
 
   const handleSortChange = (value: string) => {
     const params = new URLSearchParams(searchParams.toString());
@@ -100,7 +100,7 @@ function MyPlanContent({ children }: { children: ReactNode }) {
         {/* Tabs + Sort */}
         <div className="mt-8 flex items-end justify-between gap-4">
 
-          <div className="flex gap-3 rounded-xl bg-gray-800 p-1">
+          <div className="grid grid-cols-1 gap-3 rounded-xl bg-gray-800 p-1 md:grid-cols-2">
 
             <Link href="/My-Plan"
               className={`rounded-lg px-6 py-2.5 text-sm font-semibold transition ${!isSaved
@@ -159,8 +159,8 @@ export default function MyPlanLayout({
 }) {
   return (
     <Suspense fallback={
-        <div className="min-h-screen bg-[#0F1115]" />
-      }
+      <div className="min-h-screen bg-[#0F1115]" />
+    }
     >
       <MyPlanContent>
         {children}
