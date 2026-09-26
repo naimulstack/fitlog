@@ -133,9 +133,9 @@ function MyPlanContent({ children }: { children: ReactNode }) {
               onChange={(e) => handleSortChange(e.target.value)}
               className="w-52 rounded-lg border border-white/30 bg-[#15181F] px-4 py-2 text-sm text-white outline-none"
             >
-              <option value="rating">Rating</option>
               <option value="duration">Duration</option>
               <option value="calories">Calories</option>
+              <option value="rating">Rating</option>
             </select>
 
           </div>

@@ -140,11 +140,6 @@ const DetailsPage = async ({ params, }: {
                     </div>
 
                 </div>
-
-                {/* <div>
-                    <h2>Jihan</h2>
-                </div> */}
-
             </section>
 
         </main>
