@@ -7,9 +7,24 @@ import Link from "next/link";
 import { FaRegClock, FaFire, FaStar, } from "react-icons/fa";
 import { RxCross2 } from "react-icons/rx";
 import { toast } from "react-toastify";
+import { useSearchParams } from "next/navigation";
 
 export default function SavedPage() {
   const { saved, removeFromSaved } = useFitLog();
+
+  const searchParams = useSearchParams();
+  const sortBy = searchParams.get("sort") || "rating";
+  const sortedSaved = [...saved].sort((a, b) => {
+    if (sortBy === "duration") {
+      return b.duration - a.duration;
+    }
+
+    if (sortBy === "calories") {
+      return b.caloriesBurned - a.caloriesBurned;
+    }
+
+    return b.rating - a.rating;
+  });
 
   const handleRemove = (id: number, name: string) => {
     removeFromSaved(id);
@@ -36,7 +51,7 @@ export default function SavedPage() {
         </div>
       ) : (
         <div className="space-y-4">
-          {saved.map((workout: IDataType) => {
+          {sortedSaved.map((workout: IDataType) => {
             return (
               <div key={workout.id}
                 className="rounded-xl border border-white/10 bg-[#15181F] p-3 sm:p-4"
@@ -100,8 +115,8 @@ export default function SavedPage() {
 
                     {/* Remove */}
                     <button onClick={() =>
-                        handleRemove(workout.id, workout.name)
-                      }
+                      handleRemove(workout.id, workout.name)
+                    }
                       className="p-2 text-gray-500 transition hover:text-white"
                       aria-label={`Remove ${workout.name}`}
                     >

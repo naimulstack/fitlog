@@ -2,7 +2,7 @@
 
 import { useFitLog } from "@/context/FitLogContext";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { ReactNode } from "react";
 import { ToastContainer } from "react-toastify";
 
@@ -32,7 +32,21 @@ export default function MyPlanLayout({ children }: { children: ReactNode }) {
   );
 
   const pathname = usePathname();
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
   const isSaved = pathname === "/My-Plan/saved";
+
+  const sortBy = searchParams.get("sort") || "rating";
+
+  const handleSortChange = (value: string) => {
+    const params = new URLSearchParams(searchParams.toString());
+
+    params.set("sort", value);
+
+    router.push(`${pathname}?${params.toString()}`);
+  };
+
 
   return (
     <main className="min-h-screen bg-[#0F1115] px-4 py-10 text-white">
@@ -81,23 +95,43 @@ export default function MyPlanLayout({ children }: { children: ReactNode }) {
           </div>
         </div>
 
-        <div className="mt-8 flex gap-3 bg-[#151921]">
-          <Link href="/My-Plan"
-            className={`rounded-lgpx-6 py-2.5 text-sm font-semibold transition ${!isSaved
-              ? "bg-[#20242E] text-white border border-white/10"
-              : "text-gray-400 hover:text-white"
-              }`}
-          >
-            Today's Plan
-          </Link>
-          <Link href="/My-Plan/saved"
-            className={`rounded-lg px-6 py-2.5 text-sm font-semibold transition ${isSaved
-              ? "bg-[#20242E] text-white border border-white/10"
-              : "text-gray-400 hover:text-white"
-              }`}
-          >
-            Saved
-          </Link>
+        <div className="mt-8 flex items-end justify-between gap-4">
+
+          <div className="flex gap-3 bg-gray-800 p-1 rounded-xl">
+            <Link href="/My-Plan"
+              className={`rounded-lg px-6 py-2.5 text-sm font-semibold transition ${!isSaved
+                ? "border border-white/10 bg-[#20242E] text-white"
+                : "text-gray-400 hover:text-white"
+                }`}
+            >
+              Today's Plan
+            </Link>
+
+            <Link href="/My-Plan/saved"
+              className={`rounded-lg px-6 py-2.5 text-sm font-semibold transition ${isSaved
+                ? "border border-white/10 bg-[#20242E] text-white"
+                : "text-gray-400 hover:text-white"
+                }`}
+            >
+              Saved
+            </Link>
+          </div>
+
+          {/* Sort */}
+          <div className="flex gap-4 items-center">
+            <label className="mb-1 block text-xs text-gray-400">
+              Sort By
+            </label>
+
+            <select
+              value={sortBy} onChange={(e) => handleSortChange(e.target.value)}
+              className="w-52 rounded-lg border border-white/30 bg-[#15181F] px-4 py-2 text-sm text-white outline-none"
+            >
+              <option value="rating">Rating</option>
+              <option value="duration">Duration</option>
+              <option value="calories">Calories</option>
+            </select>
+          </div>
         </div>
 
         <div className="mt-6">

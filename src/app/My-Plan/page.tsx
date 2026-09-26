@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import { useFitLog } from "@/context/FitLogContext";
 import Image from "next/image";
 import Link from "next/link";
@@ -10,6 +11,21 @@ import { toast } from "react-toastify";
 
 const TodaysPlanPage = () => {
   const { plan, removeFromPlan } = useFitLog();
+
+  const searchParams = useSearchParams();
+  const sortBy = searchParams.get("sort") || "rating";
+
+  const sortedPlan = [...plan].sort((a, b) => {
+    if (sortBy === "duration") {
+      return b.duration - a.duration;
+    }
+
+    if (sortBy === "calories") {
+      return b.caloriesBurned - a.caloriesBurned;
+    }
+
+    return b.rating - a.rating;
+  });
 
   const [doneId, setDoneId] = useState<number[]>([]);
   const [isDoneLoaded, setIsDoneLoaded] = useState(false);
@@ -71,8 +87,7 @@ const TodaysPlanPage = () => {
             Browse the library and add a lift to get today moving.
           </p>
 
-          <Link
-            href="/"
+          <Link href="/"
             className="mt-5 inline-block rounded-md bg-[#CCFF00] px-5 py-2 font-semibold text-black"
           >
             Go to workouts
@@ -80,7 +95,7 @@ const TodaysPlanPage = () => {
         </div>
       ) : (
         <div className="space-y-4">
-          {plan.map((data) => {
+          {sortedPlan.map((data) => {
             const isDone = doneId.includes(data.id);
 
             return (
@@ -146,14 +161,13 @@ const TodaysPlanPage = () => {
 
                     {/* Mark as Done */}
                     <button onClick={() =>
-                        handleDone(data.id, data.name)
-                      }
+                      handleDone(data.id, data.name)
+                    }
                       disabled={isDone}
-                      className={`flex items-center gap-2 rounded-full px-4 py-2 text-xs font-semibold transition ${
-                        isDone
-                          ? "cursor-default bg-gray-500 text-white"
-                          : "bg-[#CCFF00] text-black hover:bg-[#b8e600]"
-                      }`}
+                      className={`flex items-center gap-2 rounded-full px-4 py-2 text-xs font-semibold transition ${isDone
+                        ? "cursor-default bg-gray-500 text-white"
+                        : "bg-[#CCFF00] text-black hover:bg-[#b8e600]"
+                        }`}
                     >
                       <FaCheck size={11} />
 
@@ -162,8 +176,8 @@ const TodaysPlanPage = () => {
 
                     {/* Remove */}
                     <button onClick={() =>
-                        handleRemove(data.id, data.name)
-                      }
+                      handleRemove(data.id, data.name)
+                    }
                       className="p-2 text-gray-500 transition hover:text-white"
                       aria-label={`Remove ${data.name}`}
                     >
