@@ -1,10 +1,7 @@
 
-
+import DetailsAdd from "@/components/DetailsAdd/page";
 import Image from "next/image";
 import { IDataType } from "@/types/data-type";
-import { BiBookmark } from "react-icons/bi";
-import { LuCalendarPlus2 } from "react-icons/lu";
-
 
 const DetailsPage = async ({ params, }: {
     params: Promise<{ id: string }>;
@@ -12,7 +9,7 @@ const DetailsPage = async ({ params, }: {
     const { id } = await params;
 
     const response = await fetch(`https://api.abcz.workers.dev/api/fitlog/${id}`);
-    const workout: IDataType = await response.json();
+    const data: IDataType = await response.json();
 
     return (
         <main className="h-auto bg-[#0F1115] text-white">
@@ -23,7 +20,7 @@ const DetailsPage = async ({ params, }: {
 
                     {/* Left - Image */}
                     <div className="relative h-full overflow-hidden rounded-xl">
-                        <Image src={workout.image}alt={workout.name}fill className="object-cover"
+                        <Image src={data.image} alt={data.name} fill className="object-cover"
                         />
                     </div>
 
@@ -32,15 +29,15 @@ const DetailsPage = async ({ params, }: {
                     <div>
 
                         <h1 className="text-3xl font-bold uppercase font-oswald">
-                            {workout.name}
+                            {data.name}
                         </h1>
 
                         <p className="mt-3 text-sm leading-6 text-gray-400">
-                            {workout.description}
+                            {data.description}
                         </p>
 
                         <div className="mt-4 flex flex-wrap gap-2">
-                            {workout.muscleGroups.map((muscle) => (
+                            {data.muscleGroups.map((muscle) => (
                                 <span key={muscle} className="rounded-full bg-[#C2F800] px-4 py-1 text-xs font-semibold uppercase text-black"
                                 >
                                     {muscle}
@@ -57,7 +54,7 @@ const DetailsPage = async ({ params, }: {
                                     Equipment
                                 </span>
                                 <span className="text-sm">
-                                    {workout.equipment}
+                                    {data.equipment}
                                 </span>
                             </div>
 
@@ -66,7 +63,7 @@ const DetailsPage = async ({ params, }: {
                                     Difficulty
                                 </span>
                                 <span className="text-sm">
-                                    {workout.difficulty}
+                                    {data.difficulty}
                                 </span>
                             </div>
 
@@ -75,7 +72,7 @@ const DetailsPage = async ({ params, }: {
                                     Sets
                                 </span>
                                 <span className="text-sm">
-                                    {workout.sets}
+                                    {data.sets}
                                 </span>
                             </div>
 
@@ -84,7 +81,7 @@ const DetailsPage = async ({ params, }: {
                                     Reps
                                 </span>
                                 <span className="text-sm">
-                                    {workout.reps}
+                                    {data.reps}
                                 </span>
                             </div>
 
@@ -93,7 +90,7 @@ const DetailsPage = async ({ params, }: {
                                     Duration
                                 </span>
                                 <span className="text-sm">
-                                    {workout.duration} min
+                                    {data.duration} min
                                 </span>
                             </div>
 
@@ -102,7 +99,7 @@ const DetailsPage = async ({ params, }: {
                                     Calories
                                 </span>
                                 <span className="text-sm">
-                                    {workout.caloriesBurned} kcal
+                                    {data.caloriesBurned} kcal
                                 </span>
                             </div>
 
@@ -111,7 +108,7 @@ const DetailsPage = async ({ params, }: {
                                     Rating
                                 </span>
                                 <span className="text-sm">
-                                    {workout.rating}
+                                    {data.rating}
                                 </span>
                             </div>
 
@@ -126,12 +123,11 @@ const DetailsPage = async ({ params, }: {
                             </h2>
 
                             <ol className="mt-3 space-y-3 text-sm text-gray-400">
-                                {workout.instructions.map((instruction, index) => (
+                                {data.instructions.map((instruction, list) => (
                                     <li key={instruction}>
                                         <span className="mr-3">
-                                            {index + 1}.
+                                            {list + 1}.
                                         </span>
-
                                         {instruction}
                                     </li>
                                 ))}
@@ -139,22 +135,8 @@ const DetailsPage = async ({ params, }: {
 
                         </div>
 
-
                         {/* Buttons */}
-                        <div className="mt-6 flex gap-3">
-
-                            <button className="flex rounded-md bg-[#C2F800] px-5 py-3 text-md font-bold text-black transition hover:bg-[#d4ff3d] items-center gap-2 cursor-pointer">
-                                <LuCalendarPlus2 />
-                                Add to today's plan
-                            </button>
-
-                            <button className="flex rounded-md border border-white/20 px-5 py-3 text-md text-white transition hover:bg-white/5 items-center gap-2 cursor-pointer">
-                                <BiBookmark />
-                                 Save for later
-                            </button>
-
-                        </div>
-
+                        <DetailsAdd workout={data} />
                     </div>
 
                 </div>

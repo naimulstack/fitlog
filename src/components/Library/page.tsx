@@ -4,21 +4,17 @@ import { IDataType } from "@/types/data-type";
 import { FaRegClock, FaFire, FaStar } from "react-icons/fa";
 
 const LibraryData = async () => {
-    const response = await fetch(
-        "https://api.abcz.workers.dev/api/fitlog"
-    );
+    const response = await fetch("https://api.abcz.workers.dev/api/fitlog");
 
     const data: IDataType[] = await response.json();
 
     return (
-        <div className="container mx-auto mt-10">
+        <div id="workout-library" className="container mx-auto mt-10">
 
-            {/* Library Heading */}
             <div className="mb-8">
                 <h2 className="font-oswald text-3xl font-bold text-white">
                     THE LIBRARY
                 </h2>
-
                 <p className="mt-2 text-sm text-gray-400">
                     Twelve lifts covering every major muscle group.
                 </p>
@@ -29,20 +25,14 @@ const LibraryData = async () => {
 
                 {data.map((card) => {
                     return (
-                        <Link
-                            key={card.id}
-                            href={`/exercise-details/${card.id}`}
+                        <Link key={card.id} href={`/exercise-details/${card.id}`}
                             className="block"
                         >
                             <div className="overflow-hidden rounded-2xl border border-white/10 bg-[#20242E] transition-transform duration-300 hover:scale-101 hover:border-amber-300">
 
                                 {/* Image */}
                                 <div className="relative h-[300px] w-full">
-                                    <Image
-                                        src={card.image}
-                                        alt={card.name}
-                                        fill
-                                        className="object-cover"
+                                    <Image src={card.image} alt={card.name} fill className="object-cover"
                                     />
                                 </div>
 
@@ -52,8 +42,7 @@ const LibraryData = async () => {
                                     {/* Muscle Groups */}
                                     <div className="mb-5 flex flex-wrap gap-2">
                                         {card.muscleGroups.map((muscle) => (
-                                            <span
-                                                key={muscle}
+                                            <span key={muscle}
                                                 className="rounded-full bg-[#C2F800] px-3 py-1 font-oswald text-[11px] font-semibold uppercase text-black"
                                             >
                                                 {muscle}

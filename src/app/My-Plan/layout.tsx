@@ -1,0 +1,110 @@
+"use client";
+
+import { useFitLog } from "@/context/FitLogContext";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { ReactNode } from "react";
+import { ToastContainer } from "react-toastify";
+
+export default function MyPlanLayout({ children }: { children: ReactNode }) {
+  const { plan, saved } = useFitLog();
+
+  // Today's Plan
+  const planMin = plan.reduce(
+    (total, workout) => total + workout.duration,
+    0
+  );
+
+  const planCal = plan.reduce(
+    (total, workout) => total + workout.caloriesBurned,
+    0
+  );
+
+  // Saved
+  const savedMin = saved.reduce(
+    (total, workout) => total + workout.duration,
+    0
+  );
+
+  const savedCal = saved.reduce(
+    (total, workout) => total + workout.caloriesBurned,
+    0
+  );
+
+  const pathname = usePathname();
+  const isSaved = pathname === "/My-Plan/saved";
+
+  return (
+    <main className="min-h-screen bg-[#0F1115] px-4 py-10 text-white">
+      <div className="container mx-auto">
+        <div>
+          <h1 className="text-4xl font-bold uppercase font-oswald">
+            MY PLAN
+          </h1>
+          <p className="mt-2 text-sm text-gray-400">
+            Cap of five lifts for today. Finish them, then load more.
+          </p>
+        </div>
+
+        <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-3 bg-[#20242E] rounded-2xl">
+
+          <div className="p-6">
+            <div className="border-r border-gray-500 h-full">
+
+              <p className="text-xs text-gray-400 ">
+                Exercises
+              </p>
+              <h2 className="mt-2 text-3xl font-bold text-[#CCFF00]">
+                {isSaved ? saved.length : plan.length}
+              </h2>
+            </div>
+          </div>
+
+          <div className=" p-6">
+            <div className="border-r border-gray-500 h-full">
+              <p className="text-xs text-gray-400">
+                Minutes
+              </p>
+              <h2 className="mt-2 text-3xl font-bold">
+                {isSaved ? savedMin : planMin}
+              </h2>
+            </div>
+          </div>
+
+          <div className="p-6">
+            <p className="text-xs text-gray-400">
+              Calories
+            </p>
+            <h2 className="mt-2 text-3xl font-bold">
+              {isSaved ? savedCal : planCal}
+            </h2>
+          </div>
+        </div>
+
+        <div className="mt-8 flex gap-3 bg-[#151921]">
+          <Link href="/My-Plan"
+            className={`rounded-lgpx-6 py-2.5 text-sm font-semibold transition ${!isSaved
+              ? "bg-[#20242E] text-white border border-white/10"
+              : "text-gray-400 hover:text-white"
+              }`}
+          >
+            Today's Plan
+          </Link>
+          <Link href="/My-Plan/saved"
+            className={`rounded-lg px-6 py-2.5 text-sm font-semibold transition ${isSaved
+              ? "bg-[#20242E] text-white border border-white/10"
+              : "text-gray-400 hover:text-white"
+              }`}
+          >
+            Saved
+          </Link>
+        </div>
+
+        <div className="mt-6">
+          {children}
+          <ToastContainer position="top-right" />
+        </div>
+      </div>
+    </main>
+  );
+}

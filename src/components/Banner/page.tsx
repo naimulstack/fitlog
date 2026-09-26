@@ -10,7 +10,7 @@ const BannerPage = () => {
                 {/* Left Content */}
                 <div className="max-w-[580px] my-10">
 
-                    <p className="mb-4 text-[10px] font-bold tracking-wide text-[#C2F800]">
+                    <p className="mb-4 text-[10px] font-bold tracking-wide text-[#CCFF00]">
                         WORKOUT LIBRARY
                     </p>
 
@@ -23,8 +23,8 @@ const BannerPage = () => {
                         into today's plan, and watch the week's work add up.
                     </p>
 
-                    <Link href=""
-                        className="mt-5 inline-flex items-center rounded-md bg-[#C2F800] px-6 py-2.5 text-[11px] font-bold text-black transition hover:bg-[#1A2312] hover:text-[#C2F800]"
+                    <Link href="#workout-library"
+                        className="mt-5 inline-flex items-center rounded-md bg-[#CCFF00] px-6 py-2.5 text-[11px] font-bold text-black transition hover:bg-[#1A2312] hover:text-[#C2F800]"
                     >
                         BROWSE WORKOUTS
                     </Link>

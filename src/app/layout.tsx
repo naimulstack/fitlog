@@ -5,6 +5,7 @@ import { FitLogProvider } from "@/context/FitLogContext";
 import Navbar from "@/components/Navbar/page";
 import { Oswald } from "next/font/google";
 import FooterPage from "@/components/Footer/page";
+import { ToastContainer } from "react-toastify";
 
 const oswald = Oswald({
   subsets: ["latin"],
@@ -40,6 +41,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <Navbar />
         
         {children}
+        <ToastContainer />
         <FooterPage/>
         </FitLogProvider>
 
